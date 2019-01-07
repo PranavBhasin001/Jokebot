@@ -58,7 +58,7 @@ def main():
     assert filepath, "No jokes file found"
 
     # Asserting that the file is not empty
-    jokebot_list = read_csv_file(filepath[0])
+    jokebot_list = read_csv_file(filepath[1])
     assert jokebot_list, "No jokes found in the file"
 
     while True:
