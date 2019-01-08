@@ -2,6 +2,8 @@
   <dictionary name="HP">
     <words>
       <w>jokebot</w>
+      <w>reddit</w>
+      <w>selftext</w>
     </words>
   </dictionary>
 </component>

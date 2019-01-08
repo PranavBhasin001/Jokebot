@@ -1,4 +1,4 @@
-"""Functions and main for Jokebot"""
+"""Executes the Jokebot"""
 
 from jokebot_utils import *
 from jokebot_reddit_extractor import *
@@ -12,14 +12,15 @@ import sys
 # Functions
 
 def main():
-    """Function to enable IntelliJ Python runner feature"""
+    """Encapsulation of the execution of the program"""
     # Assert statement to ensure that a joke file is provided in the command line args
     filepath = sys.argv[1:]
-    assert filepath, "No jokes file found"
+    jokebot_list = list()
 
-    # Asserting that the file is not empty
-    jokebot_list = read_csv_file(filepath[1])
-    assert jokebot_list, "No jokes found in the file"
+    if len(filepath) > 1:
+        jokebot_list = csv_jokebot_list(filepath[1])
+    else:
+        jokebot_list = reddit_jokebot_list()
 
     while True:
 
@@ -38,6 +39,22 @@ def main():
             break
 
     return
+
+
+def csv_jokebot_list(filepath):
+    """Returns a list of jokes from the given file path, given the csv is provided for joke source"""
+
+    # Asserting that the file is not empty
+    jokebot_list = read_csv_file(filepath)
+    assert jokebot_list, "No jokes found in the file"
+
+    return jokebot_list
+
+
+def reddit_jokebot_list():
+    """Returns a list of jokes from reddit page: 'https://www.reddit.com/r/dadjokes.json'"""
+    return json_to_list(request_page_json("https://www.reddit.com/r/dadjokes.json"))
+
 
 # Execution of the Jokebot
 

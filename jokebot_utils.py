@@ -1,4 +1,4 @@
-"""Functions and main for Jokebot"""
+"""Functions and utilities for Jokebot"""
 import time
 import csv
 
@@ -7,6 +7,7 @@ import csv
 ###################
 
 # Functions
+
 
 def print_jokes(joke_prompt, joke_punchline):
     """Prints the joke prompt and joke punchline for a given joke"""
