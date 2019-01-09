@@ -55,7 +55,6 @@ def read_csv_file(filepath):
     return joke_list
 
 
-
 def csv_jokebot_list(filepath):
     """Returns a list of jokes from the given file path, given the csv is provided for joke source"""
     # Edge Case: Asserting that the file is not empty
@@ -75,5 +74,5 @@ def select_source_mode(filepath):
 
 
 def url_validation(url):
-    """Validates that the provided url is valid"""
+    """Returns True if the given url is valid"""
     return validators.url(url)

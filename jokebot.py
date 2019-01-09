@@ -22,7 +22,7 @@ def main():
     jokebot_list = reddit_jokebot_list(reddit_url) if source_mode_reddit & url_validation(reddit_url) \
         else csv_jokebot_list(filepath[1])
     curr_mode = "Reddit" if source_mode_reddit else "the CSV File"
-    print("Your jokes are coming hot right out of", curr_mode, "any second!")
+    print("Your jokes are coming right out of", curr_mode, "any second!")
 
     while True:
 
