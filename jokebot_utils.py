@@ -1,6 +1,9 @@
 """Functions and utilities for Jokebot"""
+
 import time
 import csv
+import validators
+from jokebot_reddit_extractor import *
 
 ###################
 # Jokebot Utilities
@@ -50,3 +53,27 @@ def read_csv_file(filepath):
         for row in csv_reader:
             joke_list.append(list(row))
     return joke_list
+
+
+
+def csv_jokebot_list(filepath):
+    """Returns a list of jokes from the given file path, given the csv is provided for joke source"""
+    # Edge Case: Asserting that the file is not empty
+    jokebot_list = read_csv_file("assets/" + filepath)
+    assert jokebot_list, "No jokes found in the file"
+    return jokebot_list
+
+
+def reddit_jokebot_list(url):
+    """Returns a list of jokes from reddit page: 'https://www.reddit.com/r/dadjokes.json'"""
+    return json_to_list(request_page_json(url))
+
+
+def select_source_mode(filepath):
+    """Returns True if the source is Reddit, else False"""
+    return True if len(filepath) <= 1 else False
+
+
+def url_validation(url):
+    """Validates that the provided url is valid"""
+    return validators.url(url)

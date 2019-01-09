@@ -6,10 +6,12 @@ import requests
 # Jokebot Reddit Extractor
 ##########################
 
+# Functions
+
 
 def request_page_json(reddit_url):
     """"""
-    r = requests.get(reddit_url, headers={'User-agent': 'your bot 0.1'})
+    r = requests.get(reddit_url, headers={'User-agent': 'jokebot_2.0'})
     return r.json()
 
 

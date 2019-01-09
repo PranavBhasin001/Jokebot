@@ -1,26 +1,28 @@
 """Executes the Jokebot"""
 
 from jokebot_utils import *
-from jokebot_reddit_extractor import *
 import sys
-
 
 ##########
 # Jokebot
 ##########
 
+# Variables
+
+reddit_url = "https://www.reddit.com/r/dadjokes.json"
+
+
 # Functions
 
 def main():
-    """Encapsulation of the execution of the program"""
+    """Executes the program"""
     # Assert statement to ensure that a joke file is provided in the command line args
     filepath = sys.argv[1:]
-    jokebot_list = list()
-
-    if len(filepath) > 1:
-        jokebot_list = csv_jokebot_list(filepath[1])
-    else:
-        jokebot_list = reddit_jokebot_list()
+    source_mode_reddit = select_source_mode(filepath)
+    jokebot_list = reddit_jokebot_list(reddit_url) if source_mode_reddit & url_validation(reddit_url) \
+        else csv_jokebot_list(filepath[1])
+    curr_mode = "Reddit" if source_mode_reddit else "the CSV File"
+    print("Your jokes are coming hot right out of", curr_mode, "any second!")
 
     while True:
 
@@ -39,22 +41,6 @@ def main():
             break
 
     return
-
-
-def csv_jokebot_list(filepath):
-    """Returns a list of jokes from the given file path, given the csv is provided for joke source"""
-
-    # Asserting that the file is not empty
-    jokebot_list = read_csv_file(filepath)
-    assert jokebot_list, "No jokes found in the file"
-
-    return jokebot_list
-
-
-def reddit_jokebot_list():
-    """Returns a list of jokes from reddit page: 'https://www.reddit.com/r/dadjokes.json'"""
-    return json_to_list(request_page_json("https://www.reddit.com/r/dadjokes.json"))
-
 
 # Execution of the Jokebot
 
